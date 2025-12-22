@@ -1,0 +1,26 @@
+api_endpoints: 
+  - name: USGS
+    full_name: United States Geological Survey
+    base_url: https://earthquake.usgs.gov/fdsnws/event/1/
+    description: Provides access to earthquake event data, including search, download, and query functionalities.
+    Methods:
+      - name: Query Events
+        endpoint: query
+        method: GET
+        parameters:
+          - name: starttime
+            type: string
+            description: The start time for the event search in ISO format (YYYY-MM-DDTHH:MM:SS).
+          - name: endtime
+            type: string
+            description: The end time for the event search in ISO format (YYYY-MM-DDTHH:MM:SS).
+          - name: minmagnitude
+            type: float
+            description: The minimum magnitude of the events to be returned.
+          - name: maxmagnitude
+            type: float
+            description: The maximum magnitude of the events to be returned.
+          - name: format
+            type: string
+            description: The format of the returned data (e.g., geojson, xml, text).
+        response_format: JSON or XML depending on the 'format' parameter.

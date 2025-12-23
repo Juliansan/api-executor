@@ -1,10 +1,11 @@
 import click
-from ..parsers.yaml_parser import retrieve_yaml_atributes
+from ..core.api_manager import list_available_apis
+from ..utils.logger import setup_logging
 
 
 @click.group()
 def cli():
-    pass
+    setup_logging(debug=False)
 
 
 @cli.command()
@@ -26,7 +27,7 @@ def list_apis():
     """
     click.echo("Avaliable API's:")
     click.echo("-----------------")
-    for value in retrieve_yaml_atributes('name'):
+    for value in list_available_apis():
         click.echo(f"- {value}")
     
 

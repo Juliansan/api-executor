@@ -22,7 +22,15 @@ def _get_yaml_file(file_name: str) -> Dict[str, Any]:
     raise FileNotFoundError("File does not exists or is found")
 
 
-def retrieve_yaml_atributes(attribute: str) -> List[str]:
+def retrieve_yaml_attributes(attribute: str) -> List[str]:
+    """
+    Retrive data from yaml
+    
+    :param attribute: Descripción
+    :type attribute: str
+    :return: Descripción
+    :rtype: List[str]
+    """
     file = _get_yaml_file("available_api.yaml")
 
     return [

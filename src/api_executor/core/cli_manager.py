@@ -2,7 +2,7 @@ from typing import List, Dict, Any, Optional
 
 from loguru import logger
 from .api_manager import api_caller
-from ..parsers.yaml_parser import retrieve_yaml_attributes
+from ..parsers.yaml_parser import get_attributes, parse_details
 
 
 def _retrieve_yaml_attributes(*params: str) -> List[str]:
@@ -14,7 +14,7 @@ def _retrieve_yaml_attributes(*params: str) -> List[str]:
     """
     flattened: List[str] = []
     for attributes in params:
-        flattened.extend(retrieve_yaml_attributes(attributes))
+        flattened.extend(get_attributes(attributes))
     return flattened
 
 
@@ -29,3 +29,12 @@ def execute_api(api_name: str, api_key: Optional[str]) -> Dict[str, Any]:
     logger.info("Executing API: {api_name} with api_key: {api_key}", api_name=api_name, api_key=api_key)
     # Business logic here: validate, make request, process response
     return {"status": "pending", "api": api_name, "api_key": api_key}  # placeholder
+
+
+def get_details(api_name: str) -> Dict[str, Any]:
+    logger.info(f"Parsing YAML data for {api_name}")
+    return parse_details(api_name)
+
+
+
+    

@@ -3,7 +3,7 @@ api_endpoints:
     full_name: United States Geological Survey
     base_url: https://earthquake.usgs.gov/fdsnws/event/1/
     description: Provides access to earthquake event data, including search, download, and query functionalities.
-    Methods:
+    methods:
       - name: Query Events
         endpoint: query
         method: GET

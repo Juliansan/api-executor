@@ -1,12 +1,16 @@
+import json
 import click
 from ..core.cli_manager import list_apis
-from ..core.cli_manager import execute_api
+from ..core.cli_manager import execute_api, get_details
 from ..utils.logger import setup_logging
+from ..utils.formatter import format_api_details
 
 
 @click.group()
 def cli():
-    click.echo("This is an application for calling API's available")
+    click.echo("\n------------------------")
+    click.echo("| API automation calls |")
+    click.echo("------------------------\n")
     setup_logging(debug=False)
 
 
@@ -36,8 +40,9 @@ def list():
 
 @cli.command()
 @click.argument("api_name")
-def get_details(api_name: str):
-    pass
+def api_details(api_name: str):
+    data = get_details(api_name)
+    click.echo(format_api_details(data))
 
 
 if __name__ == "__main__":

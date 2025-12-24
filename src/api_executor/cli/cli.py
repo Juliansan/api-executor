@@ -1,4 +1,3 @@
-import json
 import click
 from ..core.cli_manager import list_apis
 from ..core.cli_manager import execute_api, get_details
@@ -15,15 +14,31 @@ def cli():
 
 
 @cli.command()
-@click.option("--api-key", envvar="API_KEY")
+@click.option("--api-key", envvar="API_KEY", help="API key for authentication")
+@click.option(
+    "--param",
+    "-p",
+    multiple=True,
+    help="Query parameters as key=value pairs (e.g., starttime=2024-01-01, minmagnitude=5.0)",
+)
 @click.argument("api_name")
-def api(api_name: str, api_key: str | None):
+def run_api(api_name: str, api_key: str | None, param: tuple[str, ...]):
     """
     Execution of API's based on API name
 
     :param api_name: Name of the API to be executed
+    :param param: Query parameters as key=value pairs
     """
-    result = execute_api(api_name, api_key)
+    # Parse key=value pairs into a dictionary
+    params_dict = {}
+    for p in param:
+        if '=' in p:
+            key, value = p.split('=', 1)
+            params_dict[key.strip()] = value.strip()
+        else:
+            click.echo(f"Warning: Ignoring invalid parameter format '{p}'. Expected key=value format.")
+    
+    result = execute_api(api_name, api_key, params_dict)
     click.echo(result)
 
 

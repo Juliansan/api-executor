@@ -22,7 +22,7 @@ def _get_data(file_name: str) -> Dict[str, Any]:
     raise FileNotFoundError("File does not exists or is found")
 
 
-def get_attributes(attribute: str) -> List[str]:
+def get_attributes(attribute: str) -> List[tuple]:
     """
     Retrive data from yaml
 
@@ -34,7 +34,7 @@ def get_attributes(attribute: str) -> List[str]:
     file = _get_data("available_api.yaml")
 
     return [
-        value for key, value in file["api_endpoints"][0].items() if key == attribute
+        (key, value) for key, value in file["api_endpoints"][0].items()
     ]
 
 

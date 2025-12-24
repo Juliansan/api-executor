@@ -1,7 +1,8 @@
-api_endpoints: 
+api_endpoints:
   - name: USGS
     full_name: United States Geological Survey
-    base_url: https://earthquake.usgs.gov/fdsnws/event/1/
+    url: https://earthquake.usgs.gov/fdsnws/event/1/
+    format: geojson
     description: Provides access to earthquake event data, including search, download, and query functionalities.
     methods:
       - name: Query Events
@@ -23,4 +24,3 @@ api_endpoints:
           - name: format
             type: string
             description: The format of the returned data (e.g., geojson, xml, text).
-        response_format: JSON or XML depending on the 'format' parameter.
